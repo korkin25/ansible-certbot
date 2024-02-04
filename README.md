@@ -1,38 +1,32 @@
-Role Name
-=========
+# Ansible Role for Certbot
 
-A brief description of the role goes here.
+## Description
 
-Requirements
-------------
+This Ansible role is designed for installing and configuring Certbot for managing Let's Encrypt SSL/TLS certificates on Nginx servers. It includes tasks for installing Certbot and its Nginx plugin, generating certificates for specified domains, and setting up automatic certificate renewal.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## Features
 
-Role Variables
---------------
+- Installing Certbot and its Nginx plugin.
+- Generating SSL certificates for domains specified.
+- Auto-renewal setup for SSL certificates.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+## Requirements
 
-Dependencies
-------------
+- Ansible 2.14 or higher.
+- A Debian or Ubuntu-based system with Nginx installed.
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+## Role Variables
 
-Example Playbook
-----------------
+The role uses the following variables which can be defined in the playbook:
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+- `certbot_email`: The email address used for registration and recovery with Let's Encrypt.
+- `acme_domains`: A list of domains for which to generate SSL certificates.
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+Example `defaults/main.yml`:
 
-License
--------
+```yaml
+---
+# defaults file for certbot
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+certbot_email: "kk573@axes.ru"
+acme_domains: []
