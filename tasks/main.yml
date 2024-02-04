@@ -14,7 +14,6 @@
     cmd: "certbot --nginx -d {{ item }} --non-interactive --agree-tos --email {{ certbot_email }}"
     creates: "/etc/letsencrypt/live/{{ item }}/fullchain.pem"
   loop: "{{ acme_domains }}"
-  notify: Reload nginx
   tags: certbot
   become: true
 
