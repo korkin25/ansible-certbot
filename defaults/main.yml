@@ -1,0 +1,5 @@
+---
+# defaults file for certbot
+
+certbot_email: "kk573@axes.ru"
+certbot_domains: []

@@ -1,0 +1,21 @@
+# vim: set filetype=yaml.ansible:
+
+galaxy_info:
+  author: korkin25
+  role_name: certbot
+  namespace: korkin25
+  description: Install&configure letsencrypt using certbot
+
+  license: BSD
+
+  min_ansible_version: "2.14"
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+
+  galaxy_tags: []

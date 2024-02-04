@@ -1,0 +1,32 @@
+---
+- name: Install certbot and certbot Nginx plugin
+  ansible.builtin.apt:
+    name:
+      - certbot
+      - python3-certbot-nginx
+    state: present
+    update_cache: false
+  tags: certbot
+  become: true
+
+- name: Generate certificates using certbot for each domain in Nginx
+  ansible.builtin.command:
+    cmd: "certbot --nginx -d {{ item }} --non-interactive --agree-tos --email {{ certbot_email }}"
+    creates: "/etc/letsencrypt/live/{{ item }}/fullchain.pem"
+  loop: "{{ acme_domains }}"
+  notify: Reload nginx
+  tags: certbot
+  become: true
+
+- name: Ensure certbot auto-renewal cron job is in place
+  ansible.builtin.cron:
+    name: "Certbot Renewal"
+    job: "/usr/bin/certbot renew --quiet --post-hook 'systemctl reload nginx'"
+    minute: "0"
+    hour: "2"
+    day: "*"
+    month: "*"
+    weekday: "2"
+    user: root
+  tags: certbot
+  become: true
